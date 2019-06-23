@@ -30,6 +30,11 @@ class User
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Exp", mappedBy="user", cascade={"persist"})
+     */
+    private $exp;
+
+    /**
      * Get id
      *
      * @return int
@@ -62,5 +67,45 @@ class User
     {
         return $this->fullname;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->exp = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add exp
+     *
+     * @param \AppBundle\Entity\Exp $exp
+     *
+     * @return User
+     */
+    public function addExp(\AppBundle\Entity\Exp $exp)
+    {
+        $this->exp[] = $exp;
+
+        return $this;
+    }
+
+    /**
+     * Remove exp
+     *
+     * @param \AppBundle\Entity\Exp $exp
+     */
+    public function removeExp(\AppBundle\Entity\Exp $exp)
+    {
+        $this->exp->removeElement($exp);
+    }
+
+    /**
+     * Get exp
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExp()
+    {
+        return $this->exp;
+    }
+}
