@@ -17,7 +17,15 @@ class UserType extends AbstractType
     {
         $builder
             ->add('fullname')
-            
+            ->add('exp', CollectionType::class, [
+                'entry_type' => ExpType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success'
