@@ -3,6 +3,16 @@
 {% block body %}
     <div class="container">
        <h2>Welcome to our Form</h2>
-        {{ form(form) }}
+        {{ form_start(form) }}
+
+            {{ form_row(form.fullname) }}
+
+            <div class="well" id="exp_list">
+                {% for row in form.exp %}
+                    {{ form_row(row) }}
+                {% endfor %}
+            </div>
+
+        {{ form_end(form) }}
     </div>
 {% endblock %}
