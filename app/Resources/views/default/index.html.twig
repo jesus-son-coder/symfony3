@@ -7,9 +7,9 @@
 
             {{ form_row(form.fullname) }}
 
-            <div class="well" id="exp_list">
+            <div class="well" id="exp_list" data-prototype="{{ form_widget(form.exp.vars.prototype)|e('html_attr') }}">
                 {% for row in form.exp %}
-                    {{ form_row(row) }}
+
                 {% endfor %}
             </div>
 
