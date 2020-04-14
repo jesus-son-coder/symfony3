@@ -1,0 +1,8 @@
+Créer de nouvelles Entité depuis la console :
+php bin/console doctrine:generate:entity 
+AppBundle:User
+AppBundle:Exp
+
+--------------------------------
+
+

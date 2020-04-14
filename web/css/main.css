@@ -1,0 +1,33 @@
+body{
+	padding-top: 50px !important;
+}
+
+footer {
+	margin-top: 75px;
+}
+
+.multiselect-zone {
+	padding-top: 40px;
+}
+
+.multiselect-zone select {
+	width: 200px;
+}
+
+.button-zone {
+	width: 100px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.btn-multiselect {
+	height: 35px;
+}
+
+svg.multiselect-svg {
+	vertical-align: unset !important;
+}
+
+.submit-zone {
+	margin-top: 15px;
+}
