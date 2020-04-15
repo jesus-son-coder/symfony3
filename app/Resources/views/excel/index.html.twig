@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <header class="page-header">
+      <h1>Excel Data Importer</h1>
+    </header>
+    <br><hr>
+    <section>
+        <div class="col-md-12">
+        <p>Les données ont bien été ipmportées dans la base de données...</p>
+        <br>
+        <table class="table table-hover">
+            <thead class="">
+            <tr>
+                <th width="">#Id</th>
+                <th width="">Name</th>
+                <th width="">Email</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for data in listData %}
+                <tr class="table-striped">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.email }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <footer>
+      <p>Copyright &copy; 2020, All Rights Reserved</p>
+    </footer>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+    $(document).ready(function(){
+     
+    });
+  </script>
+
+{% endblock %}
