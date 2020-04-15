@@ -1,0 +1,31 @@
+{% if listData|length > 0 %}
+<label class='text-success'>Les données ont été importées...</label>
+{% else %}
+<label class='text-danger'>Le fichier importé est vide...</label>
+{% endif %}
+
+<table class="table table-hover">
+    <thead class="">
+    <tr>
+        <th width="">Customer Name</th>
+        <th width="">Address</th>
+        <th width="">City</th>
+        <th width="">Postal Code</th>
+        <th width="">Country</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        {% for data in listData %}
+                <tr class="table-striped">
+                    <td> {{ data.customerName }} </td>
+                    <td>{{ data.address }} </td>
+                    <td>{{ data.city }} </td>
+                    <td>{{ data.postalCode }}</td>
+                    <td> {{ data.country }} </td>
+                </tr>
+        {% endfor %}
+ 
+    </tbody>
+</table>

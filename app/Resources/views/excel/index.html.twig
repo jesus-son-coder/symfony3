@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <header class="page-header">
+      <h1>PHPExcel - Import Excel file data into MySQL Database using Ajax</h1>
+    </header>
+    <br><hr>
+
+    <section id="file_import_form">
+        <div class="col-md-8 file-upload-wrapper">
+            <form method="POST" id="export_excel" enctype="multipart/form-data">
+                <div class="intro-message">
+                    <h2>Select excel file to upload</h2>
+                </div>
+                <div class="input-group input-group-excel">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFile">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" name="excel_file" class="custom-file-input"  id="excel_file" aria-describedby="inputGroupFile">
+                        <label id="file_choose" class="custom-file-label btn-import-excelbtn import-excel" for="file">Choisir un fichier</label>
+                    </div>
+                </div>
+                <div id="result"></div>
+                <br><br>
+            
+            <a href="/files/template_customers_data.xlsx">Download Template Excel</a>
+            </form>
+        </div>    
+    </section>
+
+  <footer>
+      <p>Copyright &copy; 2020, All Rights Reserved</p>
+    </footer>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+    $(document).ready(function(){
+     
+        // Dès le chargement d'un fichier dans le formulaire, celyu-ci est automatiquement "submitté" sans cliquer sur un éventuel bouton :
+       $('#excel_file').change(function() {
+            $('#export_excel').submit();
+        });
+
+        $('#export_excel').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url:"{{ path('excel_import_action') }}",
+                method: "POST",
+                data: new FormData(this),
+                contentType:false,
+                processData:false,
+                success:function(data){
+                    $('#result').html(data);
+                    $('#excel_file').val('');
+                    $('label#file_choose').html("{{ app.session.get('excel_file_name') }}");
+                }
+            });
+        });
+
+    }); 
+  </script>
+
+{% endblock %}
