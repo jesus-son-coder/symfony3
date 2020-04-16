@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<header class="page-header">
+			<h3 align="center">Live Table Data Edit Delete using Tabledit in PHP</h3>
+		</header>
+		<br><br>
+		<section>
+			<div class="table-responsive">
+                <table id="editale_table" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.lastName }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+		</section>
+
+		<footer>
+			<p>Copyright &copy; 2020, All Rights Reserved</p>
+		</footer>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+	<script>
+		$(document).ready(function () {
+            $('#editale_table').Tabledit({
+                url: "{{ path('editable_process') }}",
+                columns: {
+                    identifier:[0, "id"],
+                    editable:[[1, 'first_name'], [2, 'last_name']]
+                },
+                restoreButton:false,
+                buttons: {
+                    edit: {
+                        class: 'btn btn-sm btn-info',
+                        html: '<span><i class="fas fa-pencil-alt"></i></span> &nbsp EDIT',
+                        action: 'edit'
+                    },
+                    delete: {
+                        class: 'btn btn-sm btn-danger',
+                        html: '<span><i class="far fa-trash-alt"></i></span> &nbsp DELETE',
+                        action: 'delete'
+                    },
+                    confirm: {
+                        class: 'btn btn-sm btn-default btn-are-you-sure',
+                        html: '<span><i class="fas fa-exclamation-triangle"></i></span> &nbsp Are you sure?'
+                    },
+                    save: {
+                        class: 'btn btn-sm btn-success',
+                        html: '<span><i class="far fa-save"></i></i></span> &nbsp SAVE'    
+                    },
+                },
+                onSuccess:function(data, textStatus, jqXHR) {
+                    // Suppression de ligne :
+                    if(data.action == 'delete') {
+                        $('#' + data.id).remove();
+                    }
+                    location.reload();
+                }
+            });
+        });
+	</script>
+
+{% endblock %}

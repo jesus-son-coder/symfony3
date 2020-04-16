@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="20200416_02_users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User
@@ -24,15 +24,17 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="fullname", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
-    private $fullname;
-
+    private $firstName;
 
     /**
-     * @ORM\OneToMany(targetEntity="Exp", mappedBy="user", cascade={"persist"})
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=255)
      */
-    private $exp;
+    private $lastName;
+
 
     /**
      * Get id
@@ -45,67 +47,34 @@ class User
     }
 
     /**
-     * Set fullname
-     *
-     * @param string $fullname
-     *
-     * @return User
-     */
-    public function setFullname($fullname)
-    {
-        $this->fullname = $fullname;
-
-        return $this;
-    }
-
-    /**
-     * Get fullname
-     *
      * @return string
      */
-    public function getFullname()
+    public function getFirstName()
     {
-        return $this->fullname;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->exp = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->firstName;
     }
 
     /**
-     * Add exp
-     *
-     * @param \AppBundle\Entity\Exp $exp
-     *
-     * @return User
+     * @param string $firstName
      */
-    public function addExp(\AppBundle\Entity\Exp $exp)
+    public function setFirstName($firstName)
     {
-        $this->exp[] = $exp;
-
-        return $this;
+        $this->firstName = $firstName;
     }
 
     /**
-     * Remove exp
-     *
-     * @param \AppBundle\Entity\Exp $exp
+     * @return string
      */
-    public function removeExp(\AppBundle\Entity\Exp $exp)
+    public function getLastName()
     {
-        $this->exp->removeElement($exp);
+        return $this->lastName;
     }
 
     /**
-     * Get exp
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param string $lastName
      */
-    public function getExp()
+    public function setLastName($lastName)
     {
-        return $this->exp;
+        $this->lastName = $lastName;
     }
 }

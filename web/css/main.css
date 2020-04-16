@@ -31,3 +31,9 @@ svg.multiselect-svg {
 .submit-zone {
 	margin-top: 15px;
 }
+
+.btn-are-you-sure {
+	margin-top: 2px;
+	border: 1px solid red;
+	color: red;
+}
