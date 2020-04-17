@@ -2,28 +2,29 @@
 
 {% block body %}
     <div class="container">
-    <header class="page-header">
-      <h1>Excel Data Importer</h1>
-    </header>
-    <section>
-      <h2>Success: All Excel Data have been imported to the Database !</h2>
-    </section>
+        <header class="page-header">
+            <h1>Excel Data Importer</h1>
+        </header>
+        <section>
+            <h2>Success: All Excel Data have been imported to the Database !</h2>
+        </section>
 
-    <footer>
-      <p>Copyright &copy; 2020, All Rights Reserved</p>
-    </footer>
-  </div>
+        <footer>
+            <p>Copyright &copy; 2020, All Rights Reserved</p>
+        </footer>
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
 
     <script>
-    $(document).ready(function(){
-      $('#multiselect').multiselect();
+        $(document).ready(function () {
+            $('#multiselect').multiselect();
 
-      
-    });
-  </script>
+
+        });
+    </script>
 
 {% endblock %}
