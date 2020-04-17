@@ -1,19 +1,31 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        <script src="{{ asset('js/jquery3.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.js') }}"></script>
-        <script src="{{ asset('js/multiselect.min.js') }}"></script>
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+        <script src="https://kit.fontawesome.com/b594accb70.js" crossorigin="anonymous"></script>
+    {% endblock %}
+</head>
+<body>
+<div class="main-content">
+    {% block body %}{% endblock %}
+</div>
+
+<div class="footer">
+    <p class="footer-text">Copyright 2020</p>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('js/jquery3.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/multiselect.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.tabledit.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+{% endblock %}
+</body>
 </html>
