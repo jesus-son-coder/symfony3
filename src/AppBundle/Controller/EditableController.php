@@ -2,17 +2,20 @@
 
 namespace AppBundle\Controller;
 
-use App\Entity\User;
+use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class EditableController extends Controller
 {
-    /**
-     * @Route("/editable", name="editable_homepage")
-     */
+  /**
+   * @Route("/editable", name="editable_homepage")
+   * @param Request $request
+   * @return Response
+   */
     public function indexAction(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
@@ -23,9 +26,11 @@ class EditableController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/editable_process", name="editable_process")
-     */
+  /**
+   * @Route("/editable_process", name="editable_process")
+   * @param Request $request
+   * @return JsonResponse
+   */
     public function processAction(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
