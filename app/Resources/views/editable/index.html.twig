@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block javascripts %}
-
+    {{ parent() }}
 	<script>
 		$(document).ready(function () {
             $('#editale_table').Tabledit({
@@ -69,7 +69,7 @@
                 },
                 onSuccess:function(data, textStatus, jqXHR) {
                     // Suppression de ligne :
-                    if(data.action == 'delete') {
+                    if(data.action === 'delete') {
                         $('#' + data.id).remove();
                     }
                     location.reload();

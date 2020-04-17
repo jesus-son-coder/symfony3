@@ -65,13 +65,14 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
 
     <script>
-    $(document).ready(function(){
-      $('#multiselect').multiselect();
+      $(document).ready(function(){
+        $('#multiselect').multiselect();
 
-      
-    });
+
+      });
   </script>
 
 {% endblock %}
