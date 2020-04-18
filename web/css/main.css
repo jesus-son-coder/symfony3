@@ -698,3 +698,7 @@ FOOTER Styling
 .heart {
 	color: red;
 }
+
+.img-circle {
+	border-radius: 50%;
+}

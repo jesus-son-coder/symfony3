@@ -54,8 +54,22 @@ class DefaultController extends Controller
    */
     public function showAction($geniusName)
     {
+        $funFact = 'Octopuses can change the color of their body in just *three-tenths* of a second!';
+
+        $cache = $this->get('doctrine_cache.providers.my_markdown_cache');
+        $key = md5($funFact);
+        if($cache->contains($key)) {
+          $funFact = $cache->fetch($key);
+        }
+        else {
+          $funFact = $this->get('markdown.parser')
+            ->transform($funFact);
+          $cache->save($key, $funFact);
+        }
+
         return $this->render('genus/show.html.twig', array(
-          'name' => $geniusName
+          'name' => $geniusName,
+          'funFact' => $funFact
         ));
     }
 
