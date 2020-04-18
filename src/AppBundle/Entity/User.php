@@ -3,109 +3,78 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  *
- * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Table(name="user")
  */
-class User
+class User implements UserInterface
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fullname", type="string", length=255)
-     */
-    private $fullname;
+  /**
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(name="id", type="integer")
+   */
+  private $id;
+
+  /**
+   * @ORM\Column(name="email", type="string", length=255, unique=true)
+   */
+  private $email;
+
+  /**
+   * Get id
+   *
+   * @return int
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
 
 
-    /**
-     * @ORM\OneToMany(targetEntity="Exp", mappedBy="user", cascade={"persist"})
-     */
-    private $exp;
+  public function getUsername()
+  {
+    return $this->email;
+  }
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * @return mixed
+   */
+  public function getEmail()
+  {
+    return $this->email;
+  }
 
-    /**
-     * Set fullname
-     *
-     * @param string $fullname
-     *
-     * @return User
-     */
-    public function setFullname($fullname)
-    {
-        $this->fullname = $fullname;
 
-        return $this;
-    }
+  /**
+   * @param mixed $email
+   */
+  public function setEmail($email)
+  {
+    $this->email = $email;
+  }
 
-    /**
-     * Get fullname
-     *
-     * @return string
-     */
-    public function getFullname()
-    {
-        return $this->fullname;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->exp = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
-    /**
-     * Add exp
-     *
-     * @param \AppBundle\Entity\Exp $exp
-     *
-     * @return User
-     */
-    public function addExp(\AppBundle\Entity\Exp $exp)
-    {
-        $this->exp[] = $exp;
+  public function getRoles()
+  {
+    return ['ROLE_USER'];
+  }
 
-        return $this;
-    }
+  public function getPassword()
+  {
+  }
 
-    /**
-     * Remove exp
-     *
-     * @param \AppBundle\Entity\Exp $exp
-     */
-    public function removeExp(\AppBundle\Entity\Exp $exp)
-    {
-        $this->exp->removeElement($exp);
-    }
+  public function getSalt()
+  {
+  }
 
-    /**
-     * Get exp
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getExp()
-    {
-        return $this->exp;
-    }
+
+  public function eraseCredentials()
+  {
+  }
 }
