@@ -1,4 +1,10 @@
 <?php
+/**
+ *  Created with PhpStorm
+ * by User: @hseka
+ * Date : 18/04/2020
+ * Time: 22:48
+ **/
 
 namespace AppBundle\Security;
 
@@ -8,14 +14,6 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-/**
- *  Created with PhpStorm
- * by User: @hseka
- * Date : 18/04/2020
- * Time: 22:48
- **/
-
 use Symfony\Component\Form\FormFactoryInterface;
 
 class LoginformAuthenticator extends AbstractFormLoginAuthenticator
@@ -33,15 +31,17 @@ class LoginformAuthenticator extends AbstractFormLoginAuthenticator
 
   public function getCredentials(Request $request)
   {
+    // Méthode #1 :
     // $isLoginSubmit = $request->getPathInfo() == '/login' && $request->isMethod('POST');
-    // ou, au lieu de coder en dur l'url '/login', on peut utiliser le nom de la route ('security_login') comme ci-dessous :
+    // ou Méthode #2 :
+    // au lieu de coder en dur l'url '/login', on peut utiliser le nom de la route ('security_login') comme ci-dessous :
     // Si les deux conditions ci-dessous sont réunies, alors le User vient de soumettre le Formulaire de Login :
     $isLoginSubmit = $request->attributes->get('_route') === 'security_login' && $request->isMethod('POST');
 
     if(!$isLoginSubmit) {
       /* If you return null from getCredentials(),
         Symfony skips trying to authenticate the user
-        and the request continues on like normal. */
+        and the request continues on, like normal. */
       return null;
     }
 
@@ -52,7 +52,7 @@ class LoginformAuthenticator extends AbstractFormLoginAuthenticator
      * ...Ainsi :
      * If the user is trying to login, our new task is to fetch the username & password and return them.
      */
-    // 1) Création d'un formulaire de Login, et récupération des élément
+    // 1) Création d'un formulaire de Login, et récupération des éléments :
     $form = $this->formFactory->create(LoginForm::class);
     $form->handleRequest($request);
 
