@@ -21,6 +21,10 @@ services:
         class: AppBundle\DataFixtures\ORM\LoadFixtures
         tags: [doctrine.fixture.orm]
 
+    app.security.login_form_authenticator:
+        class: AppBundle\Security\LoginformAuthenticator
+        autowire: true
+
     # default configuration for services in *this* file
     #_defaults:
         # automatically injects dependencies in your services
