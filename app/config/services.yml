@@ -25,6 +25,12 @@ services:
         class: AppBundle\Security\LoginformAuthenticator
         autowire: true
 
+    app.doctrine.hash_password_listener:
+        class: AppBundle\Doctrine\HashPasswordListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber }
+
     # default configuration for services in *this* file
     #_defaults:
         # automatically injects dependencies in your services
