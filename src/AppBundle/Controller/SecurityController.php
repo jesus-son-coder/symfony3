@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use AppBundle\Form\LoginForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,6 +18,16 @@ class SecurityController extends Controller
    */
   public function loginAction(Request $request)
   {
+    /*
+     * Création d'un User avec un Password crypté :
+      $user = new User();
+      $user->setEmail('jerome_student@gmail.com');
+      $user->setPlainPassword('jerome');
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($user);
+      $em->flush();
+    */
+
     $authenticationUtils = $this->get('security.authentication_utils');
 
     // get the login error if there is one
@@ -44,6 +55,6 @@ class SecurityController extends Controller
    */
   public function logoutAction()
   {
-    
+
   }
 }

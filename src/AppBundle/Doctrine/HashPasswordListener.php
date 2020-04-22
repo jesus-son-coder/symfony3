@@ -63,6 +63,7 @@ class HashPasswordListener implements EventSubscriber
     }
     // Encodage du Password avec la méthode de Hashage par défaut :
     $this->encodePassword($entity);
+
     $em = $args->getEntityManager();
     $meta = $em->getClassMetadata(get_class($entity));
     $em->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $entity);
