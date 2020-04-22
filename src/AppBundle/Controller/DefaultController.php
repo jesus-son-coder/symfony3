@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class DefaultController
+ * @package AppBundle\Controller
+ *
+ * @Security("is_granted('ROLE_ADMIN')")
+ */
 class DefaultController extends Controller
 {
   /**
