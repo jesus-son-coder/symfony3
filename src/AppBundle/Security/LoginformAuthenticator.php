@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -65,6 +66,11 @@ class LoginformAuthenticator extends AbstractFormLoginAuthenticator
 
     // 2) Ici, on récupère effectivement, depuis le formulaire LoginForm créé ci-dessus, le "username" et le "password" sous forme d'un tableau associatif => ['_username' => 'xxx', '_password' => 'xxx'] :
     $data = $form->getData();
+
+    $request->getSession()->set(
+      Security::LAST_USERNAME,
+      $data['_username']
+    );
 
     return $data;
   }
