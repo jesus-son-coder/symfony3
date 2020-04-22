@@ -1,5 +1,7 @@
 <?php
 
+namespace AppBundle\Security;
+
 use AppBundle\Form\LoginForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
