@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Exp;
-use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,21 +10,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
+class GenusController extends Controller
 {
   /**
-   * @Route("/", name="homepage")
+   * @Route("/genus", name="homepage_genus")
    * @param Request $request
    * @return Response
    */
-    public function indexAction(Request $request)
-    {
-      return $this->render('genus/index.html.twig');
-    }
+  public function indexAction(Request $request)
+  {
+    return $this->render('genus/index.html.twig');
+  }
 
   /**
    * @param $geniusName
-   * @Route("/genus/{geniusName}")
+   * @Route("/app/genus/{geniusName}")
    * @return Response
    */
     public function showAction($geniusName)
@@ -50,7 +49,7 @@ class DefaultController extends Controller
     }
 
   /**
-   * @Route("/genus/{genusName}/notes", name="genus_show_notes")
+   * @Route("/app/genus/{genusName}/notes", name="app_genus_show_notes")
    * @Method("GET")
    */
     public function getNotesAction()

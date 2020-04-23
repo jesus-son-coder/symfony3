@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Genus{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="genus-name">Genus App</h2>
+
+        <div class="sea-creature-container">
+            <div class="genus-photo"></div>
+            <div class="genus-details">
+                <dl class="genus-details-list">
+                    <dt>Subfamily:</dt>
+                    <dd>Octopodinae</dd>
+                    <dt>Known Species:</dt>
+                    <dd>{{ '999998'|number_format }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+{% endblock %}
