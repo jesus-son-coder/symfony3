@@ -25,19 +25,19 @@ class Genus
   private $id;
 
   /**
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", nullable=true)
    */
   private $name;
 
 
   /**
-   * @ORM\Column(name="subFamily", type="string")
+   * @ORM\Column(name="subFamily", type="string", nullable=true)
    */
   private $subFamily;
 
 
   /**
-   * @ORM\Column(name="speciesCount", type="integer")
+   * @ORM\Column(name="speciesCount", type="integer", nullable=true)
    */
   private $speciesCount;
 
@@ -112,7 +112,10 @@ class Genus
     $this->funFact = $funFact;
   }
 
-
+  public function getUpdatedAt()
+  {
+    return new \DateTime('-'.rand(0,100).' days');
+  }
 
 
 }

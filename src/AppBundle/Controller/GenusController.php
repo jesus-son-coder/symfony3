@@ -38,16 +38,42 @@ class GenusController extends Controller
     return new Response('<html lang="fr"><body>Genus created !</body></html>');
   }
 
+  /**
+   * @Route("/genus/list", name="list_genus")
+   * @param Request $request
+   * @return Response
+   */
+  public function listAction(Request $request)
+  {
+    $em = $this->getDoctrine()->getManager();
+    $genuses = $em->getRepository('AppBundle\Entity\Genus')->findAll();
+    // or :
+    // $genuses = $em->getRepository('AppBundle:Genus')->findAll();
+
+    return $this->render('genus/list.html.twig', [
+      'genuses' => $genuses
+    ]);
+  }
+
 
   /**
    * @param $geniusName
-   * @Route("/genus/{geniusName}")
+   * @Route("/genus/{geniusName}", name="genus_show")
    * @return Response
    */
   public function showAction($geniusName)
   {
-    $funFact = 'Octopuses can change the color of their body in just *three-tenths* of a second!';
+    $em = $this->getDoctrine()->getManager();
+    $genus = $em->getRepository('AppBundle:Genus')->findOneBy([
+      'name' => $geniusName
+    ]);
 
+    if(!$genus) {
+      throw $this->createNotFoundException('No genus found !');
+    }
+
+    /*
+     * Désactiver le Cache :
     $cache = $this->get('doctrine_cache.providers.my_markdown_cache');
     $key = md5($funFact);
     if ($cache->contains($key)) {
@@ -57,10 +83,10 @@ class GenusController extends Controller
         ->transform($funFact);
       $cache->save($key, $funFact);
     }
+    */
 
     return $this->render('genus/show.html.twig', array(
-      'name' => $geniusName,
-      'funFact' => $funFact
+      'genus' => $genus,
     ));
   }
 
