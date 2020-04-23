@@ -18,15 +18,16 @@ class SecurityController extends Controller
    */
   public function loginAction(Request $request)
   {
-    /*
-     * Création d'un User avec un Password crypté :
+      /*
+      // Création d'un User avec un Password crypté :
       $user = new User();
-      $user->setEmail('jerome_student@gmail.com');
-      $user->setPlainPassword('jerome');
+      $user->setEmail('michael_student@gmail.com');
+      $user->setPlainPassword('mike');
+      $user->setRoles(['ROLE_ADMIN']);
       $em = $this->getDoctrine()->getManager();
       $em->persist($user);
       $em->flush();
-    */
+      */
 
     $authenticationUtils = $this->get('security.authentication_utils');
 
