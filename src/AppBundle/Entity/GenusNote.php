@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Genus;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GenusNoteRepository")
  * @ORM\Table(name="20200425_01_genus_notes")
  */
 class GenusNote
