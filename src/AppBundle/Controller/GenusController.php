@@ -46,7 +46,8 @@ class GenusController extends Controller
   public function listAction(Request $request)
   {
     $em = $this->getDoctrine()->getManager();
-    $genuses = $em->getRepository('AppBundle\Entity\Genus')->findAll();
+    $genuses = $em->getRepository('AppBundle\Entity\Genus')
+              ->findAllPublishedOrderedBySize();
     // or :
     // $genuses = $em->getRepository('AppBundle:Genus')->findAll();
 
