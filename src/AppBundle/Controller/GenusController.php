@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Genus;
 use AppBundle\Entity\GenusNote;
+use AppBundle\Service\MarkdownTransformer;
 use Faker\Factory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -89,23 +90,14 @@ class GenusController extends Controller
       throw $this->createNotFoundException('No genus found !');
     }
 
-    /*
-     * Désactiver le Cache :
-    $cache = $this->get('doctrine_cache.providers.my_markdown_cache');
-    $key = md5($funFact);
-    if ($cache->contains($key)) {
-      $funFact = $cache->fetch($key);
-    } else {
-      $funFact = $this->get('markdown.parser')
-        ->transform($funFact);
-      $cache->save($key, $funFact);
-    }
-    */
+    $transformer = new MarkdownTransformer($this->get('markdown.parser'));
+    $funFact = $transformer->parse($genus->getFunFact());
 
     $recentNotes = $em->getRepository('AppBundle:GenusNote')->findAllRecentNotesForGenus($genus);
 
     return $this->render('genus/show.html.twig', array(
       'genus' => $genus,
+      'funFact' => $funFact,
       'recentNotesCount' => count($recentNotes)
     ));
   }
