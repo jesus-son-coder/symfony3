@@ -9,6 +9,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Genus;
+use AppBundle\Entity\GenusNote;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -19,6 +20,16 @@ class LoadFixtures extends Fixture
   {
     $faker = Factory::create();
 
+    // Ajouter des Genus :
+    // $this->addGenus(10, $manager, $faker);
+
+    // Ajouter des GenusNotes :
+    $this->addGenusNote(80, $manager, $faker);
+  }
+
+
+  private function addGenus($j, ObjectManager $manager, $faker)
+  {
     $genera = [
       'Octopus',
       'Balaena',
@@ -46,7 +57,6 @@ class LoadFixtures extends Fixture
       'Velodona Chun'
     ];
 
-    $j = 15;
     for ($i=0; $i<$j; $i++) {
       $genus = new Genus();
       $genus->setName($genera[rand(0,13)]);
@@ -56,7 +66,21 @@ class LoadFixtures extends Fixture
       $genus->setIsPublished($faker->boolean);
       $manager->persist($genus);
     }
-
     $manager->flush();
   }
+
+  public function addGenusNote($j, ObjectManager $manager, $faker)
+  {
+    for ($i=0; $i<$j; $i++) {
+      $genusNote = new GenusNote();
+      $genusNote->setUsername($faker->userName);
+      // $genusNote->setUserAvatarFileNname(mb_strtolower($faker->lastName).'.jpeg');
+      $genusNote->setUserAvatarFileNname('50%? leanna.jpeg : ryan.jpeg');
+      $genusNote->setNote($faker->paragraph);
+      $genusNote->setCreatedAt($faker->dateTimeBetween('-6 months', 'now'));
+      $manager->persist($genusNote);
+    }
+    $manager->flush();
+  }
+
 }
