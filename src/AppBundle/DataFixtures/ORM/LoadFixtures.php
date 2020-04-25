@@ -21,10 +21,14 @@ class LoadFixtures extends Fixture
     $faker = Factory::create();
 
     // Ajouter des Genus :
-    // $this->addGenus(10, $manager, $faker);
+    $this->addGenus(10, $manager, $faker);
 
-    // Ajouter des GenusNotes :
-    $this->addGenusNote(80, $manager, $faker);
+    $listOfGenus = $manager->getRepository('AppBundle:Genus')->findAll();
+
+     // Ajouter des GenusNotes liés aux Genus :
+    $this->addMultipleGenusNote($manager, $faker, $listOfGenus);
+
+
   }
 
 
@@ -64,18 +68,44 @@ class LoadFixtures extends Fixture
       $genus->setSpeciesCount(rand(100,9000));
       $genus->setFunFact($faker->sentence(10, true));
       $genus->setIsPublished($faker->boolean);
+
       $manager->persist($genus);
     }
     $manager->flush();
   }
 
-  public function addGenusNote($j, ObjectManager $manager, $faker)
+  public function addMultipleGenusNotesForOneGenus($k, ObjectManager $manager, $faker, Genus $genus)
+  {
+    for($i=0; $i<$k; $i++) {
+      $genusNote = new GenusNote();
+      $genusNote->setUsername($faker->userName);
+      $genusNote->setUserAvatarFileNname(mb_strtolower($faker->lastName).'.jpeg');
+      $avatarArray = ['leanna.jpeg', 'ryan.jpeg'];
+      $genusNote->setUserAvatarFileNname($avatarArray[rand(0,1)]);
+      $genusNote->setNote($faker->paragraph);
+      $genusNote->setCreatedAt($faker->dateTimeBetween('-6 months', 'now'));
+      $genusNote->setGenus($genus);
+      $manager->persist($genusNote);
+    }
+    $manager->flush();
+  }
+
+  public function addMultipleGenusNote(ObjectManager $manager, $faker, $lisfOfGenus)
+  {
+    foreach ($lisfOfGenus as $genus) {
+      $k = rand(0,10);
+      $this->addMultipleGenusNotesForOneGenus($k, $manager, $faker, $genus);
+    }
+  }
+
+
+  public function addOneStandAloneGenusNote($j, ObjectManager $manager, $faker)
   {
     for ($i=0; $i<$j; $i++) {
       $genusNote = new GenusNote();
       $genusNote->setUsername($faker->userName);
-      // $genusNote->setUserAvatarFileNname(mb_strtolower($faker->lastName).'.jpeg');
-      $genusNote->setUserAvatarFileNname('50%? leanna.jpeg : ryan.jpeg');
+      $avatarArray = ['leanna.jpeg', 'ryan.jpeg'];
+      $genusNote->setUserAvatarFileNname($avatarArray[rand(0,1)]);
       $genusNote->setNote($faker->paragraph);
       $genusNote->setCreatedAt($faker->dateTimeBetween('-6 months', 'now'));
       $manager->persist($genusNote);

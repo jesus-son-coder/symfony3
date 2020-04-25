@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Genus;
+use AppBundle\Entity\GenusNote;
+use Faker\Factory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,11 +30,25 @@ class GenusController extends Controller
    */
   public function newAction()
   {
+    $em = $this->getDoctrine()->getManager();
+    $faker = Factory::create();
+
     $genus = new Genus();
     $genus->setName('Octopus'.rand(1, 100));
-
-    $em = $this->getDoctrine()->getManager();
+    $genus->setSubFamily('Octopodinae');;
+    $genus->setFunFact($faker->sentence(10, true));
+    $genus->setSpeciesCount(rand(100,5000));
+    $genus->setIsPublished(true);
     $em->persist($genus);
+
+    $genusNote = new GenusNote();
+    $genusNote->setUsername($faker->userName);
+    $genusNote->setUserAvatarFileNname('50%? leanna.jpeg : ryan.jpeg');
+    $genusNote->setNote($faker->paragraph);
+    $genusNote->setCreatedAt($faker->dateTimeBetween('-6 months', 'now'));
+    $genusNote->setGenus($genus);
+    $em->persist($genusNote);
+
     $em->flush();
 
     return new Response('<html lang="fr"><body>Genus created !</body></html>');
@@ -92,16 +108,24 @@ class GenusController extends Controller
   }
 
   /**
-   * @Route("/genus/{genusName}/notes", name="genus_show_notes")
+   * @Route("/genus/{name}/notes", name="genus_show_notes")
    * @Method("GET")
+   * @param Genus $genus
+   * @return JsonResponse
    */
-  public function getNotesAction()
+  public function getNotesAction(Genus $genus)
   {
-    $notes = [
-      ['id' => 1, 'username' => 'AquaPelham', 'avatarUri' => '/images/leanna.jpeg', 'note' => 'Octopus asked me a riddle, outsmarted me', 'date' => 'Dec. 10, 2015'],
-      ['id' => 2, 'username' => 'AquaWeaver', 'avatarUri' => '/images/ryan.jpeg', 'note' => 'I counted 8 legs... as they wrapped around me', 'date' => 'Dec. 1, 2015'],
-      ['id' => 3, 'username' => 'AquaPelham', 'avatarUri' => '/images/leanna.jpeg', 'note' => 'Inked!', 'date' => 'Aug. 20, 2015'],
-    ];
+    $notes = [];
+    foreach ($genus->getNotes() as $note) {
+      $notes[] = [
+        'id' => $note->getId(),
+        'username' => $note->getUsername(),
+        'avatarUri' => '/images/' . $note->getUserAvatarFileNname(),
+        'note' => $note->getNote(),
+        'date' => $note->getCreatedAt()->format('M d, Y')
+      ];
+    }
+
     $data = [
       'notes' => $notes
     ];

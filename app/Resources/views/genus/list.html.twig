@@ -19,7 +19,7 @@
                     {% for genus in genuses %}
                         <tr>
                             <td>
-                                <a href="{{ path('genus_show', { 'geniusName': genus.name }) }}">
+                                <a href="{{ path('genus_show', { 'name': genus.name }) }}">
                                     {{ genus.name }}
                                 </a>
                             </td>

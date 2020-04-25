@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Genus;
 
 /**
  * @ORM\Entity
@@ -46,7 +47,8 @@ class GenusNote
 
 
   /**
-   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Genus")
+   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Genus", inversedBy="notes")
+   * @ORM\JoinColumn(nullable=false)
    */
   private $genus;
 
@@ -121,6 +123,23 @@ class GenusNote
   {
     $this->createdAt = $createdAt;
   }
+
+  /**
+   * @return mixed
+   */
+  public function getGenus()
+  {
+    return $this->genus;
+  }
+
+  /**
+   * @param mixed $genus
+   */
+  public function setGenus(Genus $genus)
+  {
+    $this->genus = $genus;
+  }
+
 
 
 }
