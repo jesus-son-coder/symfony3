@@ -49,6 +49,11 @@ class Genus
 
 
   /**
+   * @ORM\Column(name="isPublished", type="boolean")
+   */
+  private $isPublished;
+
+  /**
    * @return mixed
    */
   public function getName()
@@ -116,6 +121,23 @@ class Genus
   {
     return new \DateTime('-'.rand(0,100).' days');
   }
+
+  /**
+   * @return mixed
+   */
+  public function getIsPublished()
+  {
+    return $this->isPublished;
+  }
+
+  /**
+   * @param mixed $isPublished
+   */
+  public function setIsPublished($isPublished)
+  {
+    $this->isPublished = $isPublished;
+  }
+
 
 
 }
