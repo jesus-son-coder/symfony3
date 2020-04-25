@@ -102,8 +102,14 @@ class GenusController extends Controller
     }
     */
 
+    $recentNotes = $genus->getNotes()
+            ->filter(function(GenusNote $note){
+              return $note->getCreatedAt() > new \DateTime('-3 months');
+            });
+
     return $this->render('genus/show.html.twig', array(
       'genus' => $genus,
+      'recentNotesCount' => count($recentNotes)
     ));
   }
 
