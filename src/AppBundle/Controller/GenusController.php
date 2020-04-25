@@ -63,7 +63,7 @@ class GenusController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
     $genuses = $em->getRepository('AppBundle\Entity\Genus')
-              ->findAllPublishedOrderedBySize();
+              ->findAllPublishedOrderedByRecentActive();
     // or :
     // $genuses = $em->getRepository('AppBundle:Genus')->findAll();
 
@@ -74,15 +74,15 @@ class GenusController extends Controller
 
 
   /**
-   * @param $geniusName
-   * @Route("/genus/{geniusName}", name="genus_show")
+   * @param $name
+   * @Route("/genus/{name}", name="genus_show")
    * @return Response
    */
-  public function showAction($geniusName)
+  public function showAction($name)
   {
     $em = $this->getDoctrine()->getManager();
     $genus = $em->getRepository('AppBundle:Genus')->findOneBy([
-      'name' => $geniusName
+      'name' => $name
     ]);
 
     if(!$genus) {

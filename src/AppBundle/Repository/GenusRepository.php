@@ -15,6 +15,20 @@ use Doctrine\ORM\EntityRepository;
 class GenusRepository extends EntityRepository
 {
   /**
+   *
+   */
+  public function findAllPublishedOrderedByRecentActive()
+  {
+    return $this->createQueryBuilder('genus')
+      ->andWhere('genus.isPublished = :isPublished')
+      ->setParameter('isPublished',true)
+      ->leftJoin('genus.notes', 'genus_note')
+      ->orderBy('genus_note.createdAt', 'DESC')
+      ->getQuery()
+      ->execute();
+  }
+
+  /**
    * @return Genus[]
    */
   public function findAllPublishedOrderedBySize()
@@ -25,7 +39,5 @@ class GenusRepository extends EntityRepository
       ->orderBy('genus.speciesCount', 'DESC')
       ->getQuery()
       ->execute();
-      // "execute()" returns an array of results.
-      // égetOneOrNullResult()" returns "one" result (or null)
   }
 }
