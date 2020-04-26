@@ -32,7 +32,8 @@ class Genus
 
 
   /**
-   * @ORM\Column(name="subFamily", type="string", nullable=true)
+   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SubFamily")
+   * @ORM\JoinColumn(nullable=false)
    */
   private $subFamily;
 
@@ -64,7 +65,7 @@ class Genus
    * Genus constructor.
    * @param $notes
    */
-  public function __construct($notes)
+  public function __construct()
   {
     $this->notes = new ArrayCollection();
   }
@@ -97,7 +98,7 @@ class Genus
   /**
    * @param mixed $subFamily
    */
-  public function setSubFamily($subFamily)
+  public function setSubFamily(SubFamily $subFamily = null)
   {
     $this->subFamily = $subFamily;
   }

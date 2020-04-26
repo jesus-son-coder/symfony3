@@ -16,6 +16,11 @@ services:
         #arguments: ['@app.markdown.transformer']
         autowire: true
 
+
+    app.doctrine_fixtures:
+        class: AppBundle\DataFixtures\ORM\LoadFixtures
+        tags: [doctrine.fixture.orm]
+
     # default configuration for services in *this* file
     #_defaults:
         # automatically injects dependencies in your services

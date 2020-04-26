@@ -20,15 +20,15 @@ class LoadFixtures extends Fixture
   {
     $faker = Factory::create();
 
+    // Nombre de Genus que l'on souhaite créer :
+    $j=10;
     // Ajouter des Genus :
-    $this->addGenus(10, $manager, $faker);
+    $this->addGenus($j, $manager, $faker);
 
     $listOfGenus = $manager->getRepository('AppBundle:Genus')->findAll();
 
      // Ajouter des GenusNotes liés aux Genus :
     $this->addMultipleGenusNote($manager, $faker, $listOfGenus);
-
-
   }
 
 
@@ -51,15 +51,8 @@ class LoadFixtures extends Fixture
       'Eumetopias'
     ];
 
-    $subFamily = [
-      'Ameloctopus Norman',
-      'Cistopus Gray',
-      'Euaxoctopus Voss',
-      'Hapalochlaena Robson',
-      'Robsonella Adam',
-      'Scaeurgus Troschel',
-      'Velodona Chun'
-    ];
+
+    $subFamily = $manager->getRepository('AppBundle:SubFamily')->findAll();
 
     for ($i=0; $i<$j; $i++) {
       $genus = new Genus();

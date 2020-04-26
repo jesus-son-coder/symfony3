@@ -34,9 +34,11 @@ class GenusController extends Controller
     $em = $this->getDoctrine()->getManager();
     $faker = Factory::create();
 
+    $subFamily = $em->getRepository('AppBundle:SubFamily')->findAll();
+
     $genus = new Genus();
     $genus->setName('Octopus'.rand(1, 100));
-    $genus->setSubFamily('Octopodinae');;
+    $genus->setSubFamily($subFamily[rand(0,6)]);
     $genus->setFunFact($faker->sentence(10, true));
     $genus->setSpeciesCount(rand(100,5000));
     $genus->setIsPublished(true);

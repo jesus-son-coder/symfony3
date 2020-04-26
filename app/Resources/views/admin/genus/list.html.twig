@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Genus{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-md-12">
+                <h2 class="genus-name">Genuses List - Administration</h2>
+
+                <div class="pull-right" style="margin-bottom: 10px; margin-top: 20px;">
+                    <a href="{{ path('admin_genus_new') }}" class="btn btn-primary pull-right">Add <span class="fa fa-plus-circle"></span></a>
+                </div>
+
+                <div class="sea-creature-container">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Genus</th>
+                                <th>SubFamily</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for genus in genuses %}
+                            <tr>
+                                <td>{{ genus.name }}</td>
+                                <td>{{ genus.subFamily.name }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-xs btn-success"><i class="far fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
