@@ -8,8 +8,11 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Form\GenusFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class GenusAdminController
@@ -20,7 +23,7 @@ class GenusAdminController extends Controller
 {
   /**
    * @Route("/genus", name="admin_genus_list")
-   * @return \Symfony\Component\HttpFoundation\Response
+   * @return Response
    */
   public function indexAction()
   {
@@ -35,9 +38,23 @@ class GenusAdminController extends Controller
 
   /**
    * @Route("/genus/new", name="admin_genus_new")
+   * @param Request $request
+   * @return Response
    */
-  public function newAction()
+  public function newAction(Request $request)
   {
+    $form = $this->createForm(GenusFormType::class);
 
+    $form->handleRequest('admin/genus/new.html.twig');
+
+    $form->handleRequest($request);
+    
+    if($form->isSubmitted() && $form->isValid()) {
+
+    }
+
+    return $this->render('admin/genus/new.html.twig', [
+      'genusForm' => $form->createView()
+    ]);
   }
 }
