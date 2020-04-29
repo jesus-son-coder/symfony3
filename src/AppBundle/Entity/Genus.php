@@ -80,6 +80,15 @@ class Genus
     $this->notes = new ArrayCollection();
   }
 
+  /**
+   * @return mixed
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
+  
+
 
   /**
    * @return mixed

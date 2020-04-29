@@ -28,7 +28,7 @@
                                 <td>{{ genus.name }}</td>
                                 <td>{{ genus.subFamily.name }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-xs btn-success"><i class="far fa-edit"></i></a>
+                                    <a href="{{ path('admin_genus_edit', { 'id': genus.id }) }}" class="btn btn-xs btn-success"><i class="far fa-edit"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

@@ -63,4 +63,34 @@ class GenusAdminController extends Controller
       'genusForm' => $form->createView()
     ]);
   }
+
+
+  /**
+   * @Route("/genus/{id}/edit", name="admin_genus_edit")
+   * @param Request $request
+   * @param Genus $genus
+   * @return Response
+   */
+  public function editAction(Request $request, Genus $genus)
+  {
+    $form = $this->createForm(GenusFormType::class, $genus);
+
+    // Handles data on POST
+    $form->handleRequest($request);
+    if($form->isSubmitted() && $form->isValid()) {
+      $genus = $form->getData();
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($genus);
+      $em->flush();
+
+      $this->addFlash('success','Genus updated - you are amazing!');
+
+      return $this->redirectToRoute('admin_genus_list');
+    }
+
+    return $this->render('admin/genus/edit.html.twig', [
+      'genusForm' => $form->createView()
+    ]);
+  }
+
 }
