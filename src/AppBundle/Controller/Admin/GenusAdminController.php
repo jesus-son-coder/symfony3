@@ -8,10 +8,11 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Genus;
 use AppBundle\Form\GenusFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -45,12 +46,17 @@ class GenusAdminController extends Controller
   {
     $form = $this->createForm(GenusFormType::class);
 
-    $form->handleRequest('admin/genus/new.html.twig');
-
+    // Handles data on POST
     $form->handleRequest($request);
-    
     if($form->isSubmitted() && $form->isValid()) {
+      $genus = $form->getData();
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($genus);
+      $em->flush();
 
+      $this->addFlash('success','Genus created - you are amazing!');
+
+      return $this->redirectToRoute('admin_genus_list');
     }
 
     return $this->render('admin/genus/new.html.twig', [

@@ -45,7 +45,7 @@ class Genus
 
 
   /**
-   * @ORM\Column(name="funFact", type="string")
+   * @ORM\Column(name="funFact", type="text", nullable=true)
    */
   private $funFact;
 
@@ -54,6 +54,12 @@ class Genus
    * @ORM\Column(name="isPublished", type="boolean")
    */
   private $isPublished = true;
+
+
+  /**
+   * @ORM\Column(name="firstDiscoveredAt", type="datetime")
+   */
+  private $firstDiscoveredAt;
 
   /**
    * @ORM\OneToMany(targetEntity="AppBundle\Entity\GenusNote", mappedBy="genus")
@@ -162,6 +168,22 @@ class Genus
   public function getNotes()
   {
     return $this->notes;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getFirstDiscoveredAt()
+  {
+    return $this->firstDiscoveredAt;
+  }
+
+  /**
+   * @param mixed $firstDiscoveredAt
+   */
+  public function setFirstDiscoveredAt($firstDiscoveredAt)
+  {
+    $this->firstDiscoveredAt = $firstDiscoveredAt;
   }
 
 
