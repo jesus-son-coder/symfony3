@@ -11,7 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SubFamilyRepository")
  * @ORM\Table(name="20200426_01_subfamily")
  */
 class SubFamily
