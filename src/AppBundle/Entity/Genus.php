@@ -57,7 +57,7 @@ class Genus
 
 
   /**
-   * @ORM\Column(name="firstDiscoveredAt", type="datetime")
+   * @ORM\Column(name="firstDiscoveredAt", type="date")
    */
   private $firstDiscoveredAt;
 
