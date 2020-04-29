@@ -702,3 +702,8 @@ FOOTER Styling
 .img-circle {
 	border-radius: 50%;
 }
+
+.help-block {
+	color: red;
+	font-size: 12px;
+}
