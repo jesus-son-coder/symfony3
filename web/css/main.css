@@ -676,6 +676,16 @@ Main components
 	}
 }
 
+
+.page-header-aquanauts {
+	padding-top: 5px;
+	padding-bottom: 15px;
+	background: #eeecec;
+	margin-top: 6px;
+	border: 2px solid gray;
+}
+
+
 /******************************
 FOOTER Styling
 *******************************/

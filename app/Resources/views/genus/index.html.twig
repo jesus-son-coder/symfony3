@@ -4,6 +4,10 @@
 
 {% block body %}
     <div class="container">
+        <h1 class="page-header-aquanauts text-center">
+            Welcome
+            {{ app.user ? app.user.email : 'Aquanauts' }} !
+        </h1>
         <h2 class="genus-name">Genus App</h2>
 
         <div class="sea-creature-container">
