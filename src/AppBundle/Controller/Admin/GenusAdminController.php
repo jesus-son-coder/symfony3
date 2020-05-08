@@ -26,6 +26,7 @@ class GenusAdminController extends Controller
 {
   /**
    * @Route("/genus", name="admin_genus_list")
+   * @Security("is_granted('ROLE_ADMIN')")
    * @return Response
    */
   public function indexAction()
