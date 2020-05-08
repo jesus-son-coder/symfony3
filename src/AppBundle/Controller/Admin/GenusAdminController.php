@@ -19,14 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class GenusAdminController
  * @package AppBundle\Controller\Admin
- * @Security("is_granted('ROLE_ADMIN')")
+ * @Security("is_granted('ROLE_MANAGE_GENUS')")
  * @Route("/admin", name="admin_genus_list")
  */
 class GenusAdminController extends Controller
 {
   /**
    * @Route("/genus", name="admin_genus_list")
-   * @Security("is_granted('ROLE_ADMIN')")
    * @return Response
    */
   public function indexAction()
