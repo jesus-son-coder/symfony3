@@ -11,6 +11,7 @@ namespace AppBundle\Controller\Admin;
 use AppBundle\Entity\Genus;
 use AppBundle\Form\GenusFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class GenusAdminController
  * @package AppBundle\Controller\Admin
+ * @Security("is_granted('ROLE_ADMIN')")
  * @Route("/admin", name="admin_genus_list")
  */
 class GenusAdminController extends Controller
