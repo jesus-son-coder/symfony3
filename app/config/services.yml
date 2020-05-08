@@ -8,7 +8,6 @@ services:
         class: AppBundle\Service\MarkdownTransformer
         arguments: ['@markdown.parser', '@doctrine_cache.providers.my_markdown_cache']
 
-
     app.markdown_extension:
         class: AppBundle\Twig\MarkdownExtension
         tags:
@@ -16,11 +15,13 @@ services:
         #arguments: ['@app.markdown.transformer']
         autowire: true
 
-
     app.doctrine_fixtures:
         class: AppBundle\DataFixtures\ORM\LoadFixtures
         tags: [doctrine.fixture.orm]
 
+
+# SERCURITY SERVICES :
+# --------------------
     app.security.login_form_authenticator:
         class: AppBundle\Security\LoginformAuthenticator
         autowire: true

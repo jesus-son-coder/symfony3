@@ -10,16 +10,22 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Genus;
 use AppBundle\Entity\GenusNote;
+use AppBundle\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 
-class LoadFixtures extends Fixture
+class LoadFixtures  extends Fixture
 {
+
   public function load(ObjectManager $manager)
   {
     $faker = Factory::create();
 
+    /* ********************************************************* */
+                          /**  LOAD Genus  **/
+    /* ********************************************************* */
+    /*
     // Nombre de Genus que l'on souhaite créer :
     $j=10;
     // Ajouter des Genus :
@@ -29,7 +35,18 @@ class LoadFixtures extends Fixture
 
      // Ajouter des GenusNotes liés aux Genus :
     $this->addMultipleGenusNote($manager, $faker, $listOfGenus);
+    */
+
+    /* ********************************************************* */
+                          /**  LOAD User  **/
+    /* ********************************************************* */
+
+    // Nombre de User que l'on souhaite créer :
+    $j=10;
+    // Ajouter des Users :
+    $this->addUsers($j, $manager, $faker);
   }
+
 
 
   private function addGenus($j, ObjectManager $manager, $faker)
@@ -102,6 +119,21 @@ class LoadFixtures extends Fixture
       $genusNote->setNote($faker->paragraph);
       $genusNote->setCreatedAt($faker->dateTimeBetween('-6 months', 'now'));
       $manager->persist($genusNote);
+    }
+    $manager->flush();
+  }
+
+
+  private function addUsers($j, ObjectManager $manager, $faker)
+  {
+    $roles = [0 => ['ROLE_ADMIN'], 1 => ['ROLE_USER']];
+    for ($i=0; $i<$j; $i++) {
+      $user = new User();
+      $user->setEmail($faker->email);
+      $user->setPlainPassword('password');
+      $user->setRoles($roles[(rand(0,1))]);
+
+      $manager->persist($user);
     }
     $manager->flush();
   }

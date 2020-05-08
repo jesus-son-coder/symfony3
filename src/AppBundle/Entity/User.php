@@ -31,6 +31,9 @@ class User implements UserInterface
    */
   private $password;
 
+  /**
+   * @ORM\Column(name="plainPassword", type="string")
+   */
   private $plainPassword;
 
   /**

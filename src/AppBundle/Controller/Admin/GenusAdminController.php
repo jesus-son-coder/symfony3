@@ -28,6 +28,20 @@ class GenusAdminController extends Controller
    */
   public function indexAction()
   {
+    /**
+     * Refuser l'accès à la page Index via le Contrôleur (ci-dessous) :
+     * ----------------------------------------------------------------
+     */
+    /* Méthode 1 :
+     * -----------
+     if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        throw $this->createAccessDeniedException('GET OUT !');
+    }*/
+    /* Méthode 2 (plus simple et courte) :
+     * -----------------------------------
+      $this->denyAccessUnlessGranted('ROLE_ADMIN');
+    */
+
     $genuses = $this->getDoctrine()
         ->getRepository('AppBundle:Genus')
         ->findAll();
